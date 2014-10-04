@@ -1,46 +1,49 @@
 -------
+
 Server side stuff
 
-* intro
-* variables, functions
+* 01. intro 
+* 01. variables, functions
 
-* installing node, node REPL, running a file
-* lists, queues, stacks, algorithms
+* 02. installing node, node REPL, running a file
+* 03.1 lists, queues, stacks
+* 03.2, algorithms
 
-* objects, functions as objects
-* functional paradigms
+* 04. objects, functions as objects
+* 05. functional paradigms
 
-* fs, callbacks
-* http, using external REST APIs
+* 06.1. fs, callbacks
+* 06.2. http, using external REST APIs
 
-* promises, A+, Q
-* http API, express
+* 08. promises, A+, Q
+* 09. http API, express
 
-* processes?
+* 10. processes?
 
 * Test 1
 
 -------
+
 Client side stuff
 
-* DOM, event handling
-* feed the snake single player (with high level API)
+* 11. DOM, event handling
+* XX. feed the snake single player (with high level API)
 
-* Ajax, Ajax + promises
-* multi player feed the snake with polling?
+* 13. AJAX, AJAX + Promises
+* 14. multi player feed the snake with polling?
 
-* WebSocket, Canvas
-* rewrite the feed the snake API with canvas & WebSockets
+* 15. WebSocket, Canvas
+* XX. rewrite the feed the snake API with canvas & WebSockets
 
-* jQuery, Backbone, Underscore
-* simple SPA
+* 16. jQuery, Backbone, Underscore
+* 17. simple SPA
 
-* AngularJS
+* 18.1. AngularJS
 
-* AngularJS
+* 18.2. AngularJS
 
-* Reactive programming
+* 19. Reactive programming
 
-* ES6 with node ([co](https://github.com/visionmedia/co))
+* 20. ES6 with node ([co](https://github.com/visionmedia/co))
 
 * Test 2
