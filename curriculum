@@ -1,5 +1,20 @@
+-------
+Server side stuff
+
 * intro
 * variables, functions
-* objects, funcstions as objects
+
+* installing node, node REPL, running a file
+* lists, queues, stacks, algorithms
+
+* objects, functions as objects
 * functional paradigms
+
 * fs, callbacks
+* http, using external REST APIs
+
+* promises, A+, Q
+* http API, express
+
+-------
+Client side stuff
