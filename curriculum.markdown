@@ -1,8 +1,8 @@
 -------
-Server side stuff
+## Server side stuff
 
 * intro
-* variables, functions
+* js(hint|lint), variables, functions
 
 * installing node, node REPL, running a file
 * lists, queues, stacks, algorithms
@@ -16,12 +16,12 @@ Server side stuff
 * promises, A+, Q
 * http API, express
 
-* processes?
+* streams, CommonJS
 
 * Test 1
 
 -------
-Client side stuff
+## Client side stuff
 
 * DOM, event handling
 * feed the snake single player (with high level API)
@@ -32,14 +32,14 @@ Client side stuff
 * WebSocket, Canvas
 * rewrite the feed the snake API with canvas & WebSockets
 
-* jQuery, Backbone, Underscore
+* Reactive programming or/and tooling
+
+* jQuery, React, AMD
 * simple SPA
 
 * AngularJS
 
 * AngularJS
-
-* Reactive programming
 
 * ES6 with node ([co](https://github.com/visionmedia/co))
 
