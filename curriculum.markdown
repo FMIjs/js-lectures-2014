@@ -1,6 +1,5 @@
 -------
-
-Server side stuff
+## Server side stuff
 
 * 01. intro 
 * 01. variables, functions
@@ -24,7 +23,7 @@ Server side stuff
 
 -------
 
-Client side stuff
+## Client side stuff
 
 * 11. DOM, event handling
 * XX. feed the snake single player (with high level API)
@@ -38,6 +37,9 @@ Client side stuff
 * 16. jQuery, Backbone, Underscore
 * 17. simple SPA
 
+* jQuery, React, AMD
+* simple SPA
+
 * 18.1. AngularJS
 
 * 18.2. AngularJS
@@ -46,4 +48,7 @@ Client side stuff
 
 * 20. ES6 with node ([co](https://github.com/visionmedia/co))
 
+* ES6 with node ([co](https://github.com/visionmedia/co))
+
 * Test 2
+
