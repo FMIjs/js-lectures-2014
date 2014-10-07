@@ -186,4 +186,57 @@ more on that later
     > albums.filter(function (album) {
       return album.charAt(0) === 'Æ';
     });
+    ['Ænima']
 ```
+
+---
+# map
+```javascript
+    > albums.map(function (album) {
+      return album.toLowerCase();
+    });
+    ['lateralus', '10,000 days', 'ænima']
+```
+
+---
+# push/pop
+
+```javascript
+    > albums.push('Undertow');
+    4
+    > albums
+    ['Lateralus', '10,000 days', 'Ænima', 'Undertow']
+    > albums.pop();
+    'Undertow'
+    albums
+    ['Lateralus', '10,000 days', 'Ænima']
+```
+
+---
+# `Array`
+
+```javascript
+   > var bands = new Array(10);
+   undefined
+   > bands
+   [ , , , , , , , , ,  ]
+```
+
+---
+# shift/unshift
+
+Абсолютно същото, но в началото на списъка, а не в края
+
+---
+# прости структури от данни
+
+ * сам по себе си е списък
+ * `pop`/`push` ⇨ стек
+ * `unshift`/`pop` или `push`/`shift` ⇨ опашка
+
+---
+# сложност
+
+Сложността на операциите върху `Array` обекти най-вероятно не е каквато очаквате. За това има [много добро обяснение](http://stackoverflow.com/questions/11514308/big-o-of-javascript-arrays#answer-11535121).
+
+**TL;DR** Списъците са обекти, обектите са хешове.
