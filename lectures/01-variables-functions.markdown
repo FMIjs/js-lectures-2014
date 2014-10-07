@@ -90,3 +90,100 @@
     > panda.name
     'Стамат'
 ```
+
+---
+# функции
+
+```javascript
+    function sayHi(name) {
+      console.log('Hello, ' + name);
+    }
+```
+
+```javascript
+    function sumTwoThings(a, b) {
+      return a + b;
+    };
+```
+
+```javascript
+    function sumAllTheThings () {
+      var result = arguments[0];
+      for(var i = 1; i < arguments.length; ++i) {
+        result += arguments[i];
+      }
+
+      return result;
+    }
+```
+
+---
+
+## `for` е кофти
+more on that later
+
+---
+# за разнообразие
+### linter-и(мъхясване?)
+
+ * jslint/jshint
+ * интегрират се с всяка разумна среда
+
+***
+
+ * vim - [syntastic](https://github.com/scrooloose/syntastic)
+ * emacs - [flycheck](http://www.emacswiki.org/emacs/Flycheck)
+ * sublime text - [sublime-jslint](http://opensourcehacker.com/2012/04/12/jslint-integration-for-sublime-text-2/)
+ * ако не сте си писали редактора сами най-вероятно има разумен начин да подкарате linter с него.
+
+---
+
+# по-подробно за списъци
+
+## методи
+
+```javascript
+    > Object.getOwnPropertyNames(Object.getPrototypeOf(a))
+    [ 'length',
+      'constructor',
+      'toString',
+      'toLocaleString',
+      'join',
+      'pop',
+      'push',
+      'concat',
+      'reverse',
+      'shift',
+      'unshift',
+      'slice',
+      'splice',
+      'sort',
+      'filter',
+      'forEach',
+      'some',
+      'every',
+      'map',
+      'indexOf',
+      'lastIndexOf',
+      'reduce',
+      'reduceRight' ]
+```
+
+---
+### `for` е гаден
+
+```javascript
+    var albums = ['Lateralus', '10,000 days', 'Ænima'];
+    albums.forEach(function (album) {
+      console.log(album + ' is an album by Tool');
+    });
+```
+
+---
+# filter
+
+```javascript
+    > albums.filter(function (album) {
+      return album.charAt(0) === 'Æ';
+    });
+```
