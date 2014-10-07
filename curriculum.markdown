@@ -2,9 +2,9 @@
 ## Server side stuff
 
 * intro
-* js(hint|lint), variables, functions
-
 * installing node, node REPL, running a file
+
+* js(hint|lint), variables, functions
 * lists, queues, stacks, algorithms
 
 * objects, functions as objects
