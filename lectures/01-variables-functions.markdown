@@ -226,12 +226,6 @@ more on that later
     ['Lateralus', '10,000 days', 'Ænima']
 ```
 
-# нехомогенни
-
-```javascript
-    > things = [42, 'brie', {species: 'unicorn', пробабилитъ: '0.000000001'}]
-```
-
 ---
 # `Array`
 
@@ -263,6 +257,15 @@ more on that later
  * сам по себе си е списък
  * `pop`/`push` ⇨ стек
  * `unshift`/`pop` или `push`/`shift` ⇨ опашка
+
+---
+
+# нехомогенни
+
+```javascript
+    > things = [42, 'brie', {species: 'unicorn', пробабилитъ: '0.000000001'}]
+```
+
 
 ---
 # сложност
