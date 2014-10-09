@@ -226,6 +226,12 @@ more on that later
     ['Lateralus', '10,000 days', 'Ænima']
 ```
 
+# нехомогенни
+
+```javascript
+    > things = [42, 'brie', {species: 'unicorn', пробабилитъ: '0.000000001'}]
+```
+
 ---
 # `Array`
 
@@ -234,6 +240,16 @@ more on that later
    undefined
    > bands
    [ , , , , , , , , ,  ]
+```
+
+---
+# `Array`
+
+```javascript
+    > var things = new Array(10, 'asd');
+    undefined
+    > things
+    [ 10, 'asd' ]
 ```
 
 ---
