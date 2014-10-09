@@ -125,6 +125,12 @@
     }
 ```
 
+```javascript
+    var sumTwoThings = function (a, b) {
+      return a + b;
+    };
+```
+
 ---
 
 ## `for` е кофти
