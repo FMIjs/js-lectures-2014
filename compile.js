@@ -4,6 +4,7 @@ var hogan = require('hogan'),
     fs = require('fs'),
     path = require('path'),
     Q = require('q'),
+    ncp = require('ncp').ncp,
     lecturesDir = './lectures',
     compiledDir = './compiled',
     layoutFilename = './layout.html.mustache',
@@ -63,11 +64,23 @@ loadLayout().then(function (layout) {
       compile(layout, template).then(function (output) {
         var basename = template.split('.')[0],
             compiled = path.join(compiledDir, basename);
-        fs.writeFile(compiled + '.html', output);
+        fs.writeFile(compiled + '.html', output, function (error) {
+          if (error) {
+            console.error('Writing file failed: ' );
+            console.error(error);
+          }
+        });
       }, function (error) {
-        console.log('Could not read lecture file ' + template);
-        console.err(error);
+        console.error('Could not read lecture file ' + template);
+        console.error(error);
       });
+    });
+
+    ncp('html', 'compiled', function (error) {
+      if (error) {
+        console.error('Error copying src and img folders: ');
+        console.error(error);
+      }
     });
   });
 });
