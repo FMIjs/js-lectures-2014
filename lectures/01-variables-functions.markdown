@@ -1,6 +1,12 @@
 # variables, functions, linting
 
 ---
+# бът фърст!
+
+(знаем, че е досадно)
+## книжки
+
+---
 
 # променливи
 
@@ -118,6 +124,8 @@
     30
     > panda.class
     undefined
+    > panda['cuteness']
+    9000.001
 ```
 
 * обект/асоциативен списък са едно и също в javascript се оказва
@@ -158,6 +166,12 @@
 * но в JavaScript дефиниция на функция води до 
 създаване на инстанция на обект от класа Function
 * т.е. всичи функции са обекти, но за това повече после...
+
+```javascript
+    var sumTwoThings = function (a, b) {
+      return a + b;
+    };
+```
 
 ---
 
@@ -253,6 +267,16 @@
 ```
 
 ---
+# `Array`
+
+```javascript
+    > var things = new Array(10, 'asd');
+    undefined
+    > things
+    [ 10, 'asd' ]
+```
+
+---
 # shift/unshift
 
 Абсолютно същото, но в началото на списъка, а не в края
@@ -263,6 +287,15 @@
  * сам по себе си е списък
  * `pop`/`push` ⇨ стек
  * `unshift`/`pop` или `push`/`shift` ⇨ опашка
+
+---
+
+# нехомогенни
+
+```javascript
+    > things = [42, 'brie', {species: 'unicorn', пробабилитъ: '0.000000001'}]
+```
+
 
 ---
 # сложност
