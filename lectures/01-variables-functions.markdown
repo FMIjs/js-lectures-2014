@@ -89,6 +89,8 @@
       cuteness: 9000.001 }
     > panda.name
     'Стамат'
+    > panda['cuteness']
+    9000.001
 ```
 
 ---
