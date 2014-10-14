@@ -104,3 +104,17 @@ function findNthNumber(arr, n, lo, hi) {
   }
   return null;
 }
+
+
+/********************************
+          Exercise 5
+********************************/
+function median(arr) {
+  'use strict';
+  if (arr.length % 2 !== 0) {
+    return findNthNumber(arr, Math.floor(arr.length / 2));
+  } else {
+    return (findNthNumber(arr, Math.floor(arr.length / 2)) +
+            findNthNumber(arr, Math.floor(arr.length / 2) + 1)) / 2;
+  }
+}
