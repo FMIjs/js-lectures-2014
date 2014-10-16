@@ -280,7 +280,7 @@ Object.setPrototypeOf(child, parent);
        | proto  |
        +--------+
 ```
-
+---
 # Можем да пресъздадем горния пример и като:
 
 ```JavaScript
