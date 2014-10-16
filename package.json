@@ -3,12 +3,12 @@
   "version": "0.0.0",
   "description": "slides for the javascript course at FMI 2014",
   "main": "compile.coffee",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "MIT",
   "dependencies": {
     "hogan": "^1.0.2",
+    "ncp": "^1.0.1",
     "q": "^1.0.1"
   }
 }
