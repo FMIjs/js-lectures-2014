@@ -383,6 +383,36 @@ p.bar  === 'baz';
 
 ---
 
+# ами ако извикаме функцията без new?
+
+```JavaScript
+function katana(){ 
+  this.isSharp = true; 
+} 
+katana(); 
+assert( isSharp === true, "A global object now exists with that name and value." ); 
+ 
+var shuriken = { 
+  toss: function(){ 
+    this.isSharp = true; 
+  } 
+}; 
+shuriken.toss(); 
+assert( shuriken.isSharp === true, "When it's an object property, the value is set within the object." );
+
+```
+
+(ref: http://ejohn.org/apps/learn/#24)
+
+---
+
+# за да сменим контекста
+
+* използваме .call
+* създаваме нов с new!
+
+---
+
 # Всяка функция притежава поле prototype
 
 Полето prototype задава прототип на всички обекти създадени посредством извикване на дадената функция с оператора `new`.
@@ -426,3 +456,35 @@ function Developer(age, name) {
 // извикване на Person с new.
 Developer.prototype = Object.create(Person.prototype);
 ```
+
+--- 
+
+# Конструкторите в JS са излишни ?
+
+``` JavaScript
+var myPrototype = {
+methodA: function methodA() {},
+methodB: function methodB() {},
+methodC: function methodC() {}
+};
+ 
+createFoo = function createFoo() {
+return (Object.create(myPrototype));
+};
+```
+
+* можем да създаваме нови обекти с Object.create
+* спасяваме се от доста 'new' бъгове
+* създаваме по-добра предпоставка за полиморфизъм
+* лесно можем да въведем Factory шаблон
+
+---
+
+# Polyfill за Object.create
+
+* Object.create не се поддържа в IE6-8
+* може лесно да се 'запълни' пропуска
+* ... или чрез es5-shim
+
+
+(ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
