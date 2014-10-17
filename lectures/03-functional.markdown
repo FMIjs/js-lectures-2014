@@ -640,7 +640,83 @@ ReferenceError: superUnicornFunction is not defined
 
 ---
 # hoisting
+### function definitions
 
 Всяка функция, дефинирана с function definition е видима в целия scope, в който е дефинирана.
 
-TODO: EXPLAIN HOISTING
+```javascript
+function hoistingExample() {
+  var a = returnStuff();
+  console.log(a);
+
+  function returnStuff() {
+    return 'stuff';
+  }
+}
+```
+
+```javascript
+> hoistingExample();
+stuff
+```
+
+---
+# hoisting 
+### name declarations
+
+```javascript
+var thing = 5;
+
+function tryToMessWithGlobals() {
+    console.log(1, thing);
+    thing = 15;
+
+    var thing;
+
+    console.log(2, thing);
+}
+
+console.log(3, thing)
+tryToMessWithGlobals();
+console.log(4, thing)
+```
+
+```javascript
+3 5
+1 15
+2 15
+4 5
+```
+
+---
+# hoisting
+### function expressions (a bit tricky)
+
+```javascript
+function hoistExpression() {
+  console.log(five());
+  var five = function () {
+    return 5;
+  }
+}
+```
+
+```
+> hoistExpression()
+TypeError: undefined is not a function
+```
+
+---
+# hoisting
+### function expressions (a bit tricky)
+
+```javascript
+function hoistExpression() {
+  console.log(five());
+}
+```
+
+```
+> hoistExpression()
+ReferenceError: five is not defined
+```
