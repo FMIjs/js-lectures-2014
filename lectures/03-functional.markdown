@@ -159,7 +159,7 @@ class:center,middle
 ---
 # в javascript
 
-Очевидно javascript не е чисто функционален език. Имаме глобален state. За всяка функция има имплицитен `this`. В javascript за `this` можем да си мислим като за вграден в езика механизъм за запазване на state.
+Очевидно javascript не е чисто функционален език. Имаме глобален state. За всяка функция има косвен (implicit) `this`. В javascript за `this` можем да си мислим като за вграден в езика механизъм за запазване на state.
 
 `this` е **runtime** контекста, в който се изпълнява функцията ни.
 
@@ -187,6 +187,8 @@ var gosho = {
   setAge: setAge,
 }
 ```
+
+* при задаване на атрибут setAge нямаме 'копиране' на обекта функция setAge
 
 ---
 # `this`
@@ -220,7 +222,10 @@ true
 **Една и съща** функция се извиква в два различни контекста.
 
 ---
+
 # `call` &amp; `apply`
+
+помощни функции за промяна на контекста
 
 ```javascript
 function constructGreeting() {
@@ -257,14 +262,21 @@ var gosho = {
 'Hello, I am Gosho'
 ```
 
+* първият аргумент на 'call' е 'this' обекта
+* всички останали аргументи се предават като аргументи на функцията
+
 ---
 # `apply`
+
+* аналогично на 'call', но очаква Array
 
 ```javascript
 > constructGreeting.apply(pesho)
 'Hello, I am Pesho'
 > constructGreeting.apply(gosho)
 'Hello, I am Gosho'
+> { name: 'Stamat', constructGreeting : constructGreeting }.constructGreeting();
+'Hello, I am Stamat'
 ```
 
 ```javascript
