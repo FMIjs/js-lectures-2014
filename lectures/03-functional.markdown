@@ -682,8 +682,11 @@ var thing = 5;
 
 function tryToMessWithGlobals() {
     console.log(1, thing);
+
+    // хм. този thing не е горния!
     thing = 15;
 
+    // дефиницията отива в началото на closure-a !!!
     var thing;
 
     console.log(2, thing);
@@ -696,7 +699,7 @@ console.log(4, thing)
 
 ```javascript
 3 5
-1 15
+1 undefined
 2 15
 4 5
 ```
@@ -707,6 +710,7 @@ console.log(4, thing)
 
 ```javascript
 function hoistExpression() {
+  console.log(five);
   console.log(five());
   var five = function () {
     return 5;
@@ -716,8 +720,14 @@ function hoistExpression() {
 
 ```
 > hoistExpression()
+undefined
 TypeError: undefined is not a function
+...
 ```
+
+* защо става така ?!
+* function expressions не създават имена, а function обекти
+* function definitions отиват в началото на видимостта
 
 ---
 # hoisting
@@ -733,3 +743,29 @@ function hoistExpression() {
 > hoistExpression()
 ReferenceError: five is not defined
 ```
+
+--- 
+
+# анонимен scope
+
+```javascript
+
+(function() { 
+  var notglobal = 'something';
+  this.global = 'explicit global setting';
+})();
+
+```
+
+* избягвайте да пишете по global-ния scope/context.
+* можете да използвате анонимна функция за целта
+* ...или анонимен обект с някакъв метод
+
+--- 
+
+# промени по глобалния scope
+
+* използвайте (1) global или window
+* правете го явно - въвеждайте имена през (1)
+* анонимните функции могат да 'мажат' през this
+
