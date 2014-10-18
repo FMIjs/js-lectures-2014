@@ -769,3 +769,21 @@ ReferenceError: five is not defined
 * правете го явно - въвеждайте имена през (1)
 * анонимните функции могат да 'мажат' през this
 
+---
+
+# свързване на променливите (още)
+
+```javascript
+
+for ( var d = 0; d < 3; d++ ) (function(d){
+ setTimeout(function(){
+   console.log( "Value of d: ", d );
+   assert( d == d, "Check the value of d." );
+ }, d * 200);
+})(d);
+
+```
+
+* предаването на параметър става по стойност
+
+(ref: http://ejohn.org/apps/learn/#59)
