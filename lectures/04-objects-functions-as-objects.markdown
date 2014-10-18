@@ -52,7 +52,7 @@ function Person(age, name) {
 
 Не, не е абстрактна фабрика - Фасада (Façade).
 
-![](/images/04/facade.svg)
+![](../images/04/facade.svg)
 
 ---
 
@@ -402,3 +402,35 @@ function Developer(age, name) {
 // извикване на Person с new.
 Developer.prototype = Object.create(Person.prototype);
 ```
+
+---
+
+`__proto__` vs `Constructor.prototype`
+
+---
+
+```
+function Developer() {}
+
+Developer.prototype = { foo: 42 };
+
+var d = new Developer();
+d.__proto__ === Developer.prototype;
+var d2 = new Developer();
+d2.__proto__.foo += 1;
+
+console.log(d.foo); // 43
+```
+---
+
+А как да заменим прототипа?
+
+---
+```
+Object.setPrototypeOf(d, {
+  age: 42
+});
+
+Object.getPrototypeOf(d) === d.__proto__
+```
+---
