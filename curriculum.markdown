@@ -34,6 +34,8 @@
 * 12. AJAX, AJAX + Promises
 * 13. multi player feed the snake with polling?
 
+* XX. Tooling: advanced 
+
 * 14. WebSocket, Canvas
 * XX. rewrite the 'feed the snake' API with canvas & WebSockets
 

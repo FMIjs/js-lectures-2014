@@ -92,7 +92,7 @@ public class Developer extends Person {
 
 # Наследяване (3)
 
-Наследяването НЕ ВИНАГИ е най-добрият вариант! Наследяването състава много силен coupling между класовете, които образуват веригата на наследяването. В повечето случаи композиция е достатъчна.
+Наследяването НЕ ВИНАГИ е най-добрият вариант! Наследяването създава много силен coupling /свързаност/ между класовете, които образуват веригата на наследяването. В повечето случаи композиция е достатъчна.
 
 ---
 
@@ -254,6 +254,7 @@ var child = {
 Object.setPrototypeOf(child, parent);
 ```
 
+
 ---
 
 # Мислете за структура подобна на свързан списък
@@ -300,6 +301,28 @@ child.getAge = function () {
 
 ---
 
+# В REPL пример с Object.create
+
+```JavaScript
+
+> a = { try : 'eet' }
+{ try: 'eet' }
+> b = Object.create(a);
+{}
+> a.magic = 'tricks';
+'tricks'
+> a
+{ try: 'eet', magic: 'tricks' }
+> b
+{}
+> b.magic
+'tricks'
+>
+
+```
+
+---
+
 # "Класове"
 
 Класът е шаблон, по който можем да създадем обектни, които да притежават специфични характеристики.
@@ -335,6 +358,7 @@ var dev = new Developer(42, 'foo');
 
 * Оператора `new`
 * Изпокзвайки полета (properties) и методи на функции
+* Използваме метод call към обекта функция, за да укажем контекст (this), в който се извиква функцията
 
 ---
 
@@ -354,8 +378,61 @@ var p = new Person('baz');
 p.name === 42;
 p.bar  === 'baz';
 ```
-**Не е нужно експлицитно връщане на дадения контекст!**
-**При извикване на функция с new, return е безсмислен!**
+**Не е нужно явно (explicit) връщане на дадения контекст!**
+**При извикване на функция с new, оператор return е безсмислен!**
+
+---
+
+# ами ако извикаме функцията без new?
+
+```JavaScript
+function katana(){ 
+  this.isSharp = true; 
+} 
+katana(); 
+assert( isSharp === true, "A global object now exists with that name and value." ); 
+ 
+var shuriken = { 
+  toss: function(){ 
+    this.isSharp = true; 
+  } 
+}; 
+shuriken.toss(); 
+assert( shuriken.isSharp === true, "When it's an object property, the value is set within the object." );
+
+```
+
+(ref: http://ejohn.org/apps/learn/#24)
+
+---
+
+# за да сме сигурни, че не лиспва new
+
+```JavaScript
+
+function User(first, last){ 
+  if ( !(this instanceof arguments.callee) ) 
+    return new User(first, last); 
+   
+  this.name = first + " " + last; 
+} 
+ 
+var name = "Resig"; 
+var user = User("John", name); 
+
+assert( user, "This was defined correctly, even if it was by mistake." ); 
+assert( name == "Resig", "The right name was maintained." );
+
+```
+
+(ref: http://ejohn.org/apps/learn/#38)
+
+---
+
+# т.е. -> за да сменим контекста
+
+* използваме .call или .apply
+* създаваме нов с new!
 
 ---
 
@@ -375,7 +452,7 @@ function Person(name) {
   this.name = name;
 }
 
-// По подразбиране Person.prorotype е обект
+// По подразбиране Person.prototype е обект
 // Добавяме метод getName към този обект, което означава,
 // че всеки обект създаден чрез извикване на Person с new
 // ще притежава метод getName в своя прототип.
@@ -434,3 +511,33 @@ Object.setPrototypeOf(d, {
 Object.getPrototypeOf(d) === d.__proto__
 ```
 ---
+
+# Конструкторите в JS са излишни ?
+
+``` JavaScript
+var myPrototype = {
+methodA: function methodA() {},
+methodB: function methodB() {},
+methodC: function methodC() {}
+};
+ 
+createFoo = function createFoo() {
+return (Object.create(myPrototype));
+};
+```
+
+* можем да създаваме нови обекти с Object.create
+* спасяваме се от доста 'new' бъгове
+* създаваме по-добра предпоставка за полиморфизъм
+* лесно можем да въведем Factory шаблон
+
+---
+
+# Polyfill за Object.create
+
+* Object.create не се поддържа в IE6-8
+* може лесно да се 'запълни' пропуска
+* ... или чрез es5-shim
+
+
+(ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
