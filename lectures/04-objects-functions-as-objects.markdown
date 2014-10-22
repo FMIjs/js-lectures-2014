@@ -429,11 +429,52 @@ assert( name == "Resig", "The right name was maintained." );
 
 ---
 
-# т.е. -> за да сменим контекста
+# Смяна на контекста (1)
 
-* използваме .call или .apply
-* създаваме нов с new!
+```JavaScript
+var foo = {
+  bar: function () {
+    return this;
+  }
+};
 
+foo.bar() === foo // true
+
+var foobar = foo.bar;
+
+foobar() === foo // false
+foobar() === window // false
+
+foobar.call(foo) === foo // true
+```
+
+---
+
+# Смяна на контекста (2)
+
+* `apply(thisVal, [params...])` - извиква функция
+* `call(thisVal, param1, param2, param3,...)` - извиква функция
+* `bind(newThis, param1, param2,...)` - **създава** нова функция
+
+```JavaScript
+var foo = {
+  bar: function () {
+    return this;
+  }.bind(document)
+};
+
+foo.bar() === document // true
+
+function baz(bar, foo) {
+  console.log(this, bar, foo);
+}
+var temp = baz.bind(foo, 42);
+
+baz === temp // false
+
+baz = temp;
+baz(1.618); // foo, 42, 1.618
+```
 ---
 
 # Всяка функция притежава поле prototype
@@ -516,17 +557,17 @@ Object.getPrototypeOf(d) === d.__proto__
 
 ``` JavaScript
 var myPrototype = {
-methodA: function methodA() {},
-methodB: function methodB() {},
-methodC: function methodC() {}
+  methodA: function methodA() {},
+  methodB: function methodB() {},
+  methodC: function methodC() {}
 };
  
-createFoo = function createFoo() {
-return (Object.create(myPrototype));
+var createFoo = function createFoo() {
+  return (Object.create(myPrototype));
 };
 ```
 
-* можем да създаваме нови обекти с Object.create
+* можем да създаваме нови обекти с `Object.create`
 * спасяваме се от доста 'new' бъгове
 * създаваме по-добра предпоставка за полиморфизъм
 * лесно можем да въведем Factory шаблон
