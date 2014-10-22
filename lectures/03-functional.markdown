@@ -1,8 +1,4 @@
 class:center,middle
-# js @ ФМИ
-
----
-class:center,middle
 # функционално програмиране
 
 --
@@ -744,7 +740,7 @@ function hoistExpression() {
 ReferenceError: five is not defined
 ```
 
---- 
+---
 
 # анонимен scope
 
@@ -761,7 +757,8 @@ ReferenceError: five is not defined
 * можете да използвате анонимна функция за целта
 * ...или анонимен обект с някакъв метод
 
---- 
+
+---
 
 # промени по глобалния scope
 
