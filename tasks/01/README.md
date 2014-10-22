@@ -14,4 +14,4 @@
   - сортирайте масива и намерете `n`-тото най-голямо число.
   - използвайте partition от quick sort и рекурсивно подредете масива.
 
-6. `mean(arr)` - Намерете [медианата](http://en.wikipedia.org/wiki/Mean#Arithmetic_mean_.28AM.29) на несортиран масив с `n` елемента.
+6. `median(arr)` - Намерете [медианата](http://en.wikipedia.org/wiki/Mean#Arithmetic_mean_.28AM.29) на несортиран масив с `n` елемента.
