@@ -402,6 +402,8 @@ assert( shuriken.isSharp === true, "When it's an object property, the value is s
 
 ```
 
+...най-общо казано ще 'замърсим' контекста на извикващата функция.
+
 (ref: http://ejohn.org/apps/learn/#24)
 
 ---
@@ -551,6 +553,12 @@ Object.setPrototypeOf(d, {
 
 Object.getPrototypeOf(d) === d.__proto__
 ```
+---
+
+# Визуално обяснениe
+
+![](img/javascript-objects-treasure-map.png)
+
 ---
 
 # Конструкторите в JS са излишни ?
