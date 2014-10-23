@@ -731,3 +731,54 @@ var createFoo = function createFoo() {
 
 
 (ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
+
+---
+
+# How about privacy?
+
+---
+
+# Module pattern
+
+```JavaScript
+var Page = (function () {
+
+  var title;
+
+  return {
+    setTitle: function (t) {
+      document.title = t;
+      title = t;
+    },
+    getTitle: function () {
+      return title;
+    }
+  };
+}());
+```
+
+---
+
+# Revealing Module Pattern
+
+```
+var Page = (function () {
+
+  var title;
+
+  function setTitle(t) {
+    document.title = t;
+    title = t;
+  }
+
+  function getTitle() {
+    return title;
+  }
+
+  return {
+    setTitle: setTitle,
+    getTitle: getTitle
+  };
+}());
+```
+---
