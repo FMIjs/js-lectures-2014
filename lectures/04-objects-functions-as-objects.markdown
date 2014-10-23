@@ -269,7 +269,6 @@ var child = {
 Object.setPrototypeOf(child, parent);
 ```
 
-
 ---
 
 # Мислете за структура подобна на свързан списък
@@ -500,6 +499,19 @@ baz(1.618); // foo, 42, 1.618
 ```
 ---
 
+# Малко повече за bind...
+
+```
+function foo(a, b, c) {
+  return a + b + c;
+}
+
+var bar = foo.bind(this, 1, 2);
+bar = bar(3); //6
+```
+
+---
+
 # Всяка функция притежава поле prototype
 
 Полето prototype задава прототип на всички обекти създадени
@@ -580,6 +592,113 @@ Object.getPrototypeOf(d) === d.__proto__
 # Визуално обяснениe
 
 ![](img/javascript-objects-treasure-map.png)
+
+---
+
+# Обект наследяващ от конструкторна функция
+
+```JavaScript
+var awesomeEventHandler = {};
+EventEmitter.call(awesomeEventHandler);
+Object.setPrototypeOf(awesomeEventHandler, EventEmitter.prototype);
+
+awesomeEventHandler.on('event', function () {
+  console.log('Callback!');
+});
+awesomeEventHandler.trigger('event');
+```
+
+---
+
+![](img/crockford.png)
+
+---
+
+# Проблемът при използване на прототипи
+
+```JavaScript
+var sibling1, sibling2;
+
+inherit(sibling1, parent);
+inherit(sibling2, parent);
+
+Object.getPrototypeOf(sibling1).prop = 42;
+console.log(sibling1.prop); //42
+
+Object.getPrototypeOf(sibling2).prop = 43;
+console.log(sibling1.prop); //43
+```
+---
+
+# Mixins
+
+```JavaScript
+var awesomeFunctionality = {
+  foo: 42,
+  saySomething: function () {
+    return 'I\'m awesome code!';
+  }
+};
+
+var simpleToBecomeAwesomeObject = {
+  say: function () {
+    return 'I\'m modest object';
+  }
+};
+
+extend(simpleToBecomeAwesomeObject, awesomeFunctionality);
+```
+
+---
+
+# Mixins
+
+- Deep copy
+- Shallow copy
+
+---
+
+# Mixins - deep copy
+
+```JavaScript
+var awesomeFunctionality = {
+  baz: 1.618,
+  foo: {
+    bar: 42
+  },
+};
+
+var sibling1 = {},
+    sibling2 = {};
+
+deepCopy(sibling1, awesomeFunctionality);
+deepCopy(sibling2, awesomeFunctionality);
+sibling1.foo.bar = 13;
+console.log(sibling1.foo.bar); //13
+console.log(sibling2.foo.bar); //42
+```
+
+---
+
+# Mixins - deep copy
+
+```JavaScript
+var awesomeFunctionality = {
+  baz: 1.618,
+  foo: {
+    bar: 42
+  },
+};
+
+var sibling1 = {},
+    sibling2 = {};
+
+shallowCopy(sibling1, awesomeFunctionality);
+shallowCopy(sibling2, awesomeFunctionality);
+sibling1.foo.bar = 13;
+console.log(sibling1.foo.bar); //13
+console.log(sibling2.foo.bar); //13
+```
 
 ---
 
