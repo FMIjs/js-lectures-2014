@@ -440,17 +440,17 @@ assert( shuriken.isSharp === true,
 ```JavaScript
 
 function User(first, last){ 
-  if ( !(this instanceof arguments.callee) ) 
+  if (!(this instanceof User)) 
     return new User(first, last); 
-   
-  this.name = first + " " + last; 
+
+  this.name = first + ' ' + last; 
 } 
  
-var name = "Resig"; 
+var name = 'Resig'; 
 var user = User("John", name); 
 
-assert( user, "This was defined correctly, even if it was by mistake." ); 
-assert( name == "Resig", "The right name was maintained." );
+assert(user, 'This was defined correctly, even if it was by mistake.'); 
+assert(name == 'Resig', 'The right name was maintained.');
 
 ```
 
