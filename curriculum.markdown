@@ -13,13 +13,13 @@
 * 04. objects, functions as objects
 * 05. functional paradigms
 
-* 06.1. fs, callbacks
+* 06.1. fs, callbacks, EventEmitter, event based
 * 06.2. http, using external REST APIs
+
+* Test 1
 
 * 07. tooling : advanced
 * 08. promises, A+, Q
-
-* Test 1
 
 -------
 
