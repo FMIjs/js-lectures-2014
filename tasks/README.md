@@ -25,5 +25,5 @@ module.exports = {
 }
 ```
 
-### soon to come
-описание как се предават домашни
+## Предаване
+Решенията на задачите можете да предавате в заданията към [курса в Moodle](http://moodle.openfmi.net/course/view.php?id=1094)
