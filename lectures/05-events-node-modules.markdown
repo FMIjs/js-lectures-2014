@@ -151,3 +151,10 @@ function base() {
   });
 }
 ```
+
+TODOs: async I/O в картинки(като call stack-а)
+       stack/heap/queue https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/EventLoop
+       EventEmitter: интерфейс, как да го наследяваме
+       fs модула: четене, писане
+       общи приказки за HTTP, демо с telnet/nc
+       http модула: get/post заявки, прост сървър
