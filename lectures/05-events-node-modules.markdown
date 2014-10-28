@@ -158,3 +158,4 @@ TODOs: async I/O в картинки(като call stack-а)
        fs модула: четене, писане
        общи приказки за HTTP, демо с telnet/nc
        http модула: get/post заявки, прост сървър
+       http://howtonode.org/understanding-process-next-tick
