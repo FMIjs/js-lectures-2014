@@ -141,7 +141,7 @@ fs.readFile('/etc/passwd', function(error, data) {
 # async I/O
 
 ```javascript
-function base() {
+function top() {
   fs.readFile('/etc/passwd', function processFileReadResult(error, data) {
     if (!error) {
       process(data);
@@ -152,10 +152,210 @@ function base() {
 }
 ```
 
+Обаче!
+
+```javascript
+function base() {
+  …
+  middle();
+  // **тук файла все още не е прочетен**
+  …
+}
+```
+
+---
+# async I/O
+
+.center[
+![io callback](img/io_callback.png)
+]
+
+---
+
+# async I/O execution model
+
+.center[
+[![execution model](img/default.svg)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/EventLoop)
+]
+
+* **heap**  - мястото в паметта, където се алокират обекти (горе-долу като heap–а в C++)
+* **queue** - опашка с готовите за обработка събития
+* **stack** - call stack-а обработващ текущото събитие
+
+---
+# async I/O execution model
+
+Когато възникне събитие(I/O, таймер, …) функцията зададена да го обработи се вкарва в опашката.
+
+Когато дойде ред на някое събитие да бъде обработено неговата функция започва да се изпълнява в нишката. Тя „строи“ call stack-а.
+
+---
+# `setTimeout`
+
+Задаваме функция да се изпълни в бъдещето, но **не по-рано** от определен момент.
+
+Когато времето изтече функцията се намира някъде в опашката, реалното ѝ изпълнение може да се случи и много по-късно.
+
+---
+# `setInterval`
+
+Задава функция да се изпълнява многократно на определен интервал.
+
+---
+# `process.nextTick`
+
+На пръв поглед изглежда като alias за `setTimeout(func, 0)`.
+
+Работи значително по-ефективно.
+
+Извършва функцията в началото на следващия loop, често пъти преди останалите I/O операции.
+
+---
+# забележка за приемане на callback
+
+Когато ваша функция очаква callback като аргумент е естествено потребителите ѝ да очакват, че callback-а ще се изпълни асинхронно.
+
+Ако предпочитате действието да се извършва синхронно обмислете как да подредите кода си, така че функцията да върне стойност, вместо да извиква callback.
+
+**Една функция никога не трябва да решава динамично дали да извиква callback-а си синхронно или не.**
+
+---
+# fake async
+### лошо
+```javascript
+function kindOfAsyncMaybe(arg, callback) {
+  if (cahed(arg).length > 0) {
+    callback(cached(arg));
+  } else {
+    getDataFromNetworkAsynchornously(arg, callback);
+  }
+}
+```
+--
+```javascript
+var client = net.connect(8124, function() { 
+  console.log('client connected');
+  client.write('world!\r\n');
+});
+
+```
+
+---
+# `fs`
+
+Вградения модул `fs` предоставя функционалност за достъп до файловата система.
+
+```javascript
+var fs = require('fs');
+
+fs.readFile('/etc/passwd', function (error, data) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(data.toString());
+  }
+});
+```
+
+```javascript
+var fs = require('fs');
+
+fs.readFile('/etc/passwd', {encoding: 'utf-8'}, function (error, data) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log(data);
+  }
+});
+```
+
+---
+# `fs`
+
+```javascript
+var fs = require('fs');
+
+fs.writeFile('./log', 'some stuff to log', function (error) {
+  if (error) {
+    console.error(error);
+  }
+});
+```
+
+също приема опционален параметър `options` преди callback-а
+
+
+
+---
+# EventEmitter
+
+„Клас“ за обработка и „излъчване“ на събития.
+
+```javasctip
+var fs = require('fs'),
+    events = require('events'),
+    emitter = new events.EventEmitter();
+
+emitter.on('new_user', function (username, shell) {
+  console.log('Got a new user: ', username, shell);
+});
+
+fs.readFile('/etc/passwd', {encoding: 'utf-8'}, function(err, data) {
+  var lines = data.split('\n');
+  lines.forEach(function (line) {
+    var parts = line.split(':');
+    emitter.emit('new_user', parts[0], parts[parts.length - 1]);
+  });
+});  
+```
+
+---
+# EventEmitter
+
+Методи:
+
+* **`addListener/on(event, listener)`** - добавяне на обработваща функция за събитие
+* **`once(event, listener)`** - добавяне на обработваща функция, която ще се изпълни само веднъж(при първото излъчване на събитието)
+* **`emit(event)`** - излъчване на събитие
+* **`removeListener(event, listener)`** - премахване на обработваща функция за събитие
+* **`removeAllListeners(event)`** - премахване на *всички* обработващи функции за определено събитие
+* **`setMaxListeners(event)`** - ограничение на броя обработващи функции за едно събитие
+* **`listeners(event)`** - списък с всички обработващите функции за дадено събитие
+
+---
+# EventEmitter
+
+Често пъти обекти, които връщат различни библиотеки наследяват от `EventEmitter`
+
+```javascript
+var emitter = Object.create(EventEmitter.prototype);
+```
+
+---
+# network
+
+.center[
+**`socket`** - абстракция за междупроцесна комуникация през мрежа
+![муфа](img/socket.jpg)
+]
+
+---
+# `telnet`
+
+---
+# `require('http')`
+
+`http` модула в node реализира интерфейс за правене на http заявки през мрежата и за реализиране на http сървър
+
+* `http.get`
+* `http.createServer`
+
+---
+# `http.get/http.post`
+
+---
+# `http.createServer`
+
+
 TODOs: async I/O в картинки(като call stack-а)
-       stack/heap/queue https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/EventLoop
-       EventEmitter: интерфейс, как да го наследяваме
-       fs модула: четене, писане
-       общи приказки за HTTP, демо с telnet/nc
-       http модула: get/post заявки, прост сървър
        http://howtonode.org/understanding-process-next-tick
