@@ -4,4 +4,4 @@
 
 ---
 
-Ако искате да си играете с github примера с emoji-тата може да използвате `https://pastebin.com/raw.php?i=VPAZ5hfw`, за да не се мъчите с rate limit-а на github.
+Ако искате да си играете с [github примера с emoji-тата](https://github.com/FMIjs/js-lectures-2014/tree/master/examples/rand-emoji) може да използвате `https://pastebin.com/raw.php?i=VPAZ5hfw`, за да не се мъчите с rate limit-а на github.
