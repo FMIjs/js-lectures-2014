@@ -40,8 +40,7 @@ class: center middle
 
 ---
 
-
-# концепцията позволява предаване на управеление през thread-ове
+# предаване на управеление през thread-ове
 
 ```Java
 
@@ -72,7 +71,7 @@ void buttonHandler() {
 
 ---
 
-# отплеснахме се. сега за event loop...малко повече
+# сега за event loop...малко повече
 
 * най-популярният event loop е този на Windows OS-a при използване на Win32 API
 
@@ -86,7 +85,7 @@ void buttonHandler() {
 
 ---
 
-# callbacks е окей като подход, но за малко
+# (1) callbacks е окей като подход, но за малко
 
 * правенето на неща последователно може да доведе до т.нар. the pyramid of dooma
 
@@ -108,8 +107,9 @@ step1(function (value1) {
 
 (ref: http://raynos.github.io/presentation/shower/controlflow.htm?full#PyramidOfDoom)
 
+---
 
-# callbacks е окей като подход, но за малко
+# (2) callbacks е окей като подход, но за малко
 
 * правенето на неща паралелно е лесно, но синхронизацията му - трудна
 
@@ -117,7 +117,9 @@ step1(function (value1) {
 
 * може да си напишем библиотека за всичко това и мнозина са го направили
 
-# и тук се достига натурално до идеята за Promise 
+---
+
+# so, enter: Promise 
 
 <big>
  пре-обръщат веригата на отговорност и вместо извикване на callback връщат Promise обект   
@@ -160,6 +162,7 @@ function readFile(filename, enc){
 }
 
 ```
+---
 
 # then/else -> chaining
 
@@ -170,6 +173,7 @@ function readFile(filename, enc){
         .then(thirdOperation)
         .else(syphonErrorsHere);
 ```
+---
 
 # promises with Q
 
@@ -185,8 +189,56 @@ function delay(ms) {
 }
 
 ```
+---
 
+# (1) паралелно четене 
 
+<big> неудобния подход </big>
+
+```JavaScript
+function readJsonFiles(filenames, callback) {
+  var pending = filenames.length;
+  var called = false;
+  var results = [];
+  if (pending === 0) {
+    // we need to return early in the case where there
+    // are no files to read, but we must not return immediately
+    // because that unleashes "Zalgo". This makes code very hard
+    // to reason about as the order becomes increasingly
+    // non-deterministic.
+    return setTimeout(function () { callback(); }, 0);
+  }
+  filenames.forEach(function (filename, index) {
+    readJSON(filename, function (err, res) {
+      if (err) {
+        if (!called) callback(err);
+        return;
+      }
+      results[index] = res;
+      if (0 === --pending) {
+        callback(null, res);
+      }
+    });
+  });
+}
+```
+---
+# (2) паралелно четене...
+
+<big> Удобния подход ! </big>
+
+```JavaScript
+function readJsonFiles(filenames) {
+  // N.B. passing readJSON as a function, not calling it with `()`
+  return Promise.all(filenames.map(readJSON));
+}
+readJsonFiles(['a.json', 'b.json']).done(function (results) {
+  // results is an array of the values stored in a.json and b.json
+}, function (err) {
+  // If any of the files fails to be read, err is the first error
+});
+```
+---
 # denodify
 
 ```JavaScript
