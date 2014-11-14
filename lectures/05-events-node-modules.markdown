@@ -172,6 +172,24 @@ function base() {
 
 ---
 
+# basics of libuv 
+
+
+while there are still events to process:
+    e = get the next event
+    if there is a callback associated with e:
+        call the callback
+
+---
+
+# примери за i/o събития 
+
+* файл е готов за писане
+* socket има данни готови за четене
+* timer е изтекъл
+
+---
+
 # async I/O execution model
 
 .center[
