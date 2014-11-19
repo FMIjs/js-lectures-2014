@@ -91,7 +91,7 @@ Q.when('success')
 
 ## Bonus (whatever it is)
 
-```
+```javascript
 var d = Q.defer();
 d.resolve(42);
 d.promise.then(function (res) {
