@@ -1,9 +1,9 @@
 class: center middle
-# обещания/бъдеще 
+# обещания/отложено/бъдеще 
 
 ---
 
-# promises/futures
+# promises/deffered/futures
 
 <big> конструкции, използвани за синхронизирация на събътия и процеси (в смисъла на дейности) в някои езици, позволяващи конкурентно програмиране </big>
 ---
@@ -164,7 +164,7 @@ function readFile(filename, enc){
 ```
 ---
 
-# then/else -> chaining
+# then/else -> вериги (chaining)
 
 ```JavaScript
 
@@ -175,7 +175,41 @@ function readFile(filename, enc){
 ```
 ---
 
-# promises with Q
+# Бълбукане (Bubbling)
+
+стойността върната като резултат от обработваща promise функция се връща 'нагоре' по веригата от promise-и.
+
+```JavaScript
+function doSomethingAsync() {
+  return asyncHelper().then(function(val) {
+    // do some extra processing on val
+    return val; <-- becomes the resolution of the promise returned by doSomethingAsync
+  });
+}
+
+doSomethingAsync().then(function(val) {
+  console.log('resolved', val);
+}, function(err) {
+  // Will receive rejections from doSomethingAsync or bubbled from asyncHelper
+  console.log('error', err);
+});
+```
+
+---
+
+# създаване на обекти Deffered 
+
+* въвежда концепцията за отложен (deffered) обект
+
+* отложеният обект е 'опаковка' около Promise
+
+* deffered обекта може да бъде удовлетворен (resolve) или отхвърлен (reject)
+
+* горните операции ще доведат до изпълняването на съответното действие в/у Promise обекта
+
+---
+
+# пример - promises with Q
 
 ```JavaScript
 // вместо setTimeout(doSomething, 1000);
@@ -254,3 +288,9 @@ function readJSON(filename, callback){
 }
 
 ```
+
+# библиография
+
+* https://github.com/kriskowal/q и http://documentup.com/kriskowal/q/
+
+* http://howtonode.org/promises
