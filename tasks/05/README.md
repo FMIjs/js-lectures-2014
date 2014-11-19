@@ -45,6 +45,8 @@ Q.all([Q.when(1), Q.when(2), Q.when(3)])
   console.log(r === undefined);
 });
 
+// 7
+// true
 ```
 
 The code above should do the following:
@@ -54,3 +56,48 @@ The code above should do the following:
 4. Since the callback passed to the first `then` call (the first callback where the `reduce` method call is) returns a promise, we need to wait until this promise is being resolved (i.e. 100ms) and then invoke the second `done` callback in the second `then`.
 5. The argument of the callback passed to the second `then` call should be equals to `7`.
 6. Since the callback passed to the second call of `then` returns `undefined` the last callback should accept as argument `undefined` (i.e. `console.log(r === undefined)` should be equals to `true`).
+
+```javascript
+Q.when('success')
+.then(function (res) {
+  'use strict';
+  return res;
+})
+.then(function (r) {
+  'use strict';
+  console.log('%' + r);
+  throw 'error';
+})
+.then(function (a) {
+  'use strict';
+  console.log('#' + a);
+}, function (e) {
+  'use strict';
+  console.log('#' + e);
+  return 'success';
+})
+.then(function (a) {
+  'use strict';
+  console.log('&' + a);
+}, function (b) {
+  'use strict';
+  console.log('&' + b);
+});
+
+// '%success'
+// '#error'
+// '&success'
+```
+
+## Bonus (whatever it is)
+
+```
+var d = Q.defer();
+d.resolve(42);
+d.promise.then(function (res) {
+  console.log(res);
+});
+d.resolve(24);
+
+// 42
+```
