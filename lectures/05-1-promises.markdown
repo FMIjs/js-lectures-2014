@@ -273,6 +273,41 @@ readJsonFiles(['a.json', 'b.json']).done(function (results) {
 });
 ```
 ---
+
+# promisify
+
+```JavaScript
+
+function promisify(nodeAsyncFn, context) {
+  return function() {
+    var defer = q.defer()
+      , args = Array.prototype.slice.call(arguments);
+
+    args.push(function(err, val) {
+      if (err !== null) {
+        return defer.reject(err);
+      }
+
+      return defer.resolve(val);
+    });
+
+    nodeAsyncFn.apply(context || {}, args);
+
+    return defer.promise;
+  };
+};
+
+/////
+
+var readFile = promisify(fs.readFile);
+readFile('test.txt').then(function(data) {
+  console.log(data);
+});
+
+```
+
+---
+
 # denodify
 
 ```JavaScript
