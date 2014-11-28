@@ -155,6 +155,17 @@ document.body.onclick = function (e) {
 **Метода трябва да бъде извикан с двата параметъра**, в противен случай
 handler(s) няма да бъдат премахнат(и).
 
+```javascript
+var handler = function (e) {
+  //...
+};
+el.addEventListener('click', handler);
+
+//...
+
+el.removeEventListener('click', handler);
+```
+
 ---
 
 # Премахване на събития
