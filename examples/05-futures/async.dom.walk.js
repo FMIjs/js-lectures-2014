@@ -10,8 +10,8 @@
     console.log('ENTER: ' + elem.tagName + ' level: ' + level + ' elem has ' + elem.childNodes.length + ' children');
     
     if (elem.getAttribute('att') === 'val') {
-      res.push(elem);    
-    }    
+      res.push(elem);
+    }
     
     var rpromises = [];
     
@@ -24,20 +24,22 @@
      );
 
     if ( rpromises.length ) {
+      var pp = Q.allSettled(rpromises).then(function(v) {
+        console.log('RESOLVE: all at level '  + level);
+      });
+
       console.log('RETURN: deffered ALL child calls for ' + elem.tagName);
 
-      return Q.allSettled(rpromises).then(function(v) {
-        console.log('RESOLVE: all at level '  + level);
-        return true;
-      });
-    } else { 
-        return true;
+      return pp;
     }
   }
   
   Q.fcall(dfs, document.body, 1)
   .then(function() {
     console.log('FOUND ' + res.length + ' matching elements');
+  })
+  .fail(function(e) {
+      console.log('something went wrong..?! ' + e);
   })
   .done();
   

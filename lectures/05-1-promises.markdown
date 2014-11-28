@@ -6,6 +6,9 @@ class: center middle
 # promises/deffered/futures
 
 <big> конструкции, използвани за синхронизирация на събътия и процеси (в смисъла на дейности) в някои езици, позволяващи конкурентно програмиране </big>
+
+познати и предложени още през средата на 70-те, но едва в последните години се осъзнава сериозната полза от тях в програмирането на асинхронни програми.
+
 ---
 
 # coroutines и конкурентно програмиране
@@ -22,70 +25,42 @@ class: center middle
 
 ---
 
-# някои coroutine иструменти
+# някои coroutine парадигми и инструменти 
 
-* yelding
 
 * async ops (inversion of control, callbacks)
 
-* error handling callbacksd
+* yelding / generators
+
+* error handling callbacks 
 
 * continuations - механизъм за контролиране на изпълнението. 
 
-(в нашия случай това са callback функциите, които определяме например, когато кажем server.listen. обратно извиканата функция задава как да продължи програмата и де факто работи с continuation тук)
+на практика callback функциите, които определяме например, когато кажем ___server.listen___ са асинхронни continuations. 
 
 * cooperative multitasking
 
-* не съществува такова нещо като implicit continuation. всяко извикване е tail call.
-
----
-
-# предаване на управеление през thread-ове
-
-```Java
-
-void buttonHandler() {
-    // This is executing in the Swing UI thread.
-    // We can access UI widgets here to get query parameters.
-    final int parameter = getField();
- 
-    new Thread(new Runnable() {
-        public void run() {
-            // This code runs in a separate thread.
-            // We can do things like access a database or a 
-            // blocking resource like the network to get data.
-            final int result = lookup(parameter);
- 
-            javax.swing.SwingUtilities.invokeLater(new Runnable() {
-                public void run() {
-                    // This code runs in the UI thread and can use
-                    // the fetched data to fill in UI widgets.
-                    setField(result);
-                }
-            });
-        }
-    }).start();
-}
-
-```
+* не съществува такова нещо като implicit continuation. всяко извикване на continuation е т.нар.  tail call.
 
 ---
 
 # сега за event loop...малко повече
 
-* най-популярният event loop е този на Windows OS-a при използване на Win32 API
+* да, такова нещо има в Windows OS-a за обработка на съобщения от OS към приложенията 
 
 * e, windows 3.11 често зависва... ама вие надали сте го виждали
 
-* ето защо в windows 95 се появява идеяата за preemtive multitasking
+* в доста OS е заложена идеята за preemtive multitasking
 
-* но това не е ефективно
+* това е неизбежно в Multi User Domain среда
+
+* реализирането на multi-threaded решения в рамките на една програма често е неефективно
 
 * като цяло действието на две нишки, които се състезават за даден ресурс е неефективно
 
 ---
 
-# (1) callbacks е окей като подход, но за малко
+# (1) callbacks е окей като подход,... но за малко
 
 * правенето на неща последователно може да доведе до т.нар. the pyramid of dooma
 
@@ -109,9 +84,15 @@ step1(function (value1) {
 
 ---
 
-# (2) callbacks е окей като подход, но за малко
+# (2) callbacks е окей като подход,... но за малко
 
-* правенето на неща паралелно е лесно, но синхронизацията му - трудна
+* callbacks е подход с асинхронни продължения на програмaта
+
+* ... _както казахме вече -  continuations_ 
+ 
+* комуникирането на паралелни процеси е така става по-лесно и възможно в един процес
+
+* ... но синхронизацията - трудна, трасирането за грешки - почти невъзможнo
 
 * губим се лесно в грешките
 
@@ -119,11 +100,25 @@ step1(function (value1) {
 
 ---
 
+<big> 
+
+Notice that inversion of control breaks the principles of imperative programming, in which statements are executed in the order they appear in the program, subject only to simple control structures such as conditionals or loops. Instead, with IoC, we are entering the area of reactive programming, were the program reacts to external events
+
+</big>
+
+..._от което ще избягаме в тази лекция :)_
+
+!(ref...)[https://www.fpcomplete.com/blog/2012/06/asynchronous-api-in-c-and-the-continuation-monad]
+
+---
+
 # so, enter: Promise 
 
 <big>
- пре-обръщат веригата на отговорност и вместо извикване на callback връщат Promise обект   
+ пре-обръщат веригата на отговорност и вместо предаване на continuation на callback връщат Promise обект  
 </big>
+
+* познати от около 1976 
 
 * унифицирана семантика при обработка на грешки
 
@@ -141,14 +136,36 @@ step1(function (value1) {
 
 ---
 
+<img src='http://www.mediumequalsmessage.com/blog-images/promises.png' width='70%' align='center' />
+
+---
+
 # какво е Promise
 
-<big> обект, който представя резултата от асинхронна операция </big>
+<big> обект, който представя възможният краен резултат от асинхронна операция </big>
 
-* pending - изчакващ (първоначалното състояние)
-* fulfilled - изпълнен. състоянието, което представя успешно приключване
-* rejected - отхвърлен - провалена операция
+* Може да бъде в едно от три състояния : 
 
+ * pending - изчакващ (първоначалното състояние)
+ * fulfilled - изпълнен. състоянието, което представя успешно приключване
+ * rejected - отхвърлен - провалена операция
+
+* Има метод then(), който също следва да връща promise и позволява 'навързване' на promis-и
+
+```javascript
+
+promise.then(fulfilledHandler, errorHandler, progressHandler)
+
+
+```
+
+* Стойността върната от fullfilledHandler е стойността, с която се оценява (разрешава) 'обещанието'.
+
+---
+
+# какво е Promise
+
+едно примерче 
 
 ```JavaScript
 
@@ -324,8 +341,16 @@ function readJSON(filename, callback){
 
 ```
 
+---
+
 # библиография
+
+* [Promise & Deferred objects in JavaScript Pt.1: Theory and Semantics.](http://blog.mediumequalsmessage.com/promise-deferred-objects-in-javascript-pt1-theory-and-semantics)
 
 * https://github.com/kriskowal/q и http://documentup.com/kriskowal/q/
 
-* http://howtonode.org/promises
+* [Asynchronous Control Flow with Promises](http://howtonode.org/promises)
+
+* [Asynchronous programming and continuation-passing style in JavaScript](http://www.2ality.com/2012/06/continuation-passing-style.html)
+
+* [Async JavaScript: Build More Responsive Apps with Less Code](http://www.amazon.com/gp/product/B00AKM4RVG/)
