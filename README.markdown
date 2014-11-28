@@ -1,13 +1,5 @@
 # JavaScript за напреднали @ ФМИ 2014/15
 
-<<<<<<< HEAD
-```bash
-
-npm install
-./compile.js 00
-firefox compiled/00-intro.html
-
-=======
 ```sh
 npm install
 ./compile.js

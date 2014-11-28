@@ -440,7 +440,6 @@ assert( shuriken.isSharp === true,
 ```JavaScript
 
 function User(first, last){ 
-<<<<<<< HEAD
   if ( !(this instanceof arguments.callee) ) 
     return new User(first, last); 
    
@@ -452,20 +451,7 @@ var user = User("John", name);
 
 assert( user, "This was defined correctly, even if it was by mistake." ); 
 assert( name == "Resig", "The right name was maintained." );
-=======
-  if (!(this instanceof User)) 
-    return new User(first, last); 
-
-  this.name = first + ' ' + last; 
-} 
  
-var name = 'Resig'; 
-var user = User("John", name); 
-
-assert(user, 'This was defined correctly, even if it was by mistake.'); 
-assert(name == 'Resig', 'The right name was maintained.');
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
-
 ```
 
 (ref: http://ejohn.org/apps/learn/#38)
@@ -531,23 +517,15 @@ var bar = foo.bind(this, 1, 2);
 bar = bar(3); //6
 ```
 
-<<<<<<< HEAD
 * тоест функцията bar ще бъде винаги в конкретен контекст
 * и ще получава винаги първите два параметъра тично определени
 
-=======
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 ---
 
 # Всяка функция притежава поле prototype
 
-<<<<<<< HEAD
 <h3> Полето prototype задава прототип на всички обекти създадени
 посредством извикване на дадената функция с оператора `new`. </h3>
-=======
-Полето prototype задава прототип на всички обекти създадени
-посредством извикване на дадената функция с оператора `new`.
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 
 ---
 
@@ -606,7 +584,6 @@ var d2 = new Developer();
 d2.__proto__.foo += 1;
 
 console.log(d.foo); // 43
-<<<<<<< HEAD
 console.log(Object.keys(d)); // []
 
 d.foo = 50;
@@ -620,9 +597,7 @@ console.log(Object.keys(d)); // ['foo']
 * при първото задаване на стойност за дадено property се създава такова 'конкретно' за обекта и вече се ползва само то
 * при инстанциране на обекта той де факто няма property-та и Object.keys връща празен списък, но имена които могат да се открият в прототипа се дават като property-та.
 
-=======
 ```
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 ---
 
 # А как да заменим прототипа?
@@ -766,18 +741,12 @@ var createFoo = function createFoo() {
 
 * можем да създаваме нови обекти с `Object.create`
 * спасяваме се от доста 'new' бъгове
-<<<<<<< HEAD
 * спираме да си мислим за JS като за Java
 * създаваме по-добра предпоставка за полиморфизъм
 * лесно можем да въведем Factory шаблон
 
 (ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
 
-=======
-* създаваме по-добра предпоставка за полиморфизъм
-* лесно можем да въведем Factory шаблон
-
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 ---
 
 # Polyfill за Object.create
@@ -786,12 +755,7 @@ var createFoo = function createFoo() {
 * може лесно да се 'запълни' пропуска
 * ... или чрез es5-shim
 
-<<<<<<< HEAD
 (ref: https://github.com/es-shims/es5-shim)
-=======
-
-(ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 
 ---
 
@@ -842,7 +806,4 @@ var Page = (function () {
   };
 }());
 ```
-<<<<<<< HEAD
 ---
-=======
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8

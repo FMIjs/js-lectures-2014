@@ -409,17 +409,6 @@ function doubleAll() {
 --
 
 ```c
-<<<<<<< HEAD
-int a = 0;
-
-for (int i = 0; i < 10: ++i) {
-    var j = i * 2;
-    a++;
-}
-
-printf(a); // 9
-printf(j); //
-=======
 // in c
 int a = 0;
 
@@ -430,28 +419,19 @@ for (int i = 0; i < 9; ++i) {
 
 printf("%d", a); // 9
 printf("%d", j); // error: 'j' was not declared in this scope
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 ```
 
 ---
 # области на видимост
 
-<<<<<<< HEAD
-В javascript единствените scope gate-ове са началото и края на функция.
-=======
 В javascript __единствените__ scope gate-ове са началото и краят на __*функция*__.
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 
 Всяка функция има собствена област на видимост. Всяка променлива декларирана в тялото на една функция е видима само по време на текущото изпълнение на функцията.
 
 
 ```javascript
 > function whatIsSixTimesNine() {
-<<<<<<< HEAD
 ...  var answer = parseInt('42' 13);
-=======
-...  var answer = parseInt('42', 13);
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 ...  return answer;
 ...}
 undefined

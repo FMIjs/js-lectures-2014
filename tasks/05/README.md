@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 # Promises (1)
 
 Create a server application that reads a third party website and returns its contents. (i.e. proxy). Implement the code as much as possible using promises and chain. Use Q.
 
-
 # Promises (2) 
-=======
-# Promises
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
 
 **NOTE** the promise is simplified version of Q. It is not fully backward compatible with Kris Kowal's Q.
 
@@ -29,8 +24,6 @@ In this exercise we are going to create a simple implementation of limited scope
   * `when(data)` - this method accepts a single argument. Check whether the passed argument is a promise and if it is not create new promise and return it (usig deferred). Once you return the created promise resolve it asynchronously (use `setTimeout` with second argument 0). If the argument is a promise just return it. In other words the purpose of `when` is to wrap the given argument into a promise.
 
 Note that for better design of your code you might need to add additional, private, methods to your promise in order to achieve the desired functionality. A good practice could be to add a method/s, which is/are responsible for resolving and rejecting the promise.
-<<<<<<< HEAD
-=======
 
 Example:
 
@@ -112,4 +105,3 @@ d.resolve(24);
 
 // 42
 ```
->>>>>>> cfdfa06118140670c9bd22f3917e6a1ea791ccd8
