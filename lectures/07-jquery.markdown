@@ -116,6 +116,7 @@ $(document.querySelector('#inpit')).empty();
 
 * В примерите експлицитното извикване на `document.getElementById` и `document.jquerySelector` е напълно излишно Sizzle автоматично ще извика
 `document.getElementById` вътрешно, при използване на `$('#input')`.
+
 Използването на $ с DOM елемент е полезно когато имаме референция към даден DOM елемент и искаме върху него да приложим някой от методите, които ни предлага jQuery.
 ---
 
