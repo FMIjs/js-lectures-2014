@@ -1,4 +1,8 @@
-# Promises
+# Promises (1)
+
+Create a server application that reads a third party website and returns its contents. (i.e. proxy). Implement the code as much as possible using promises and chain. Use Q.
+
+# Promises (2) 
 
 **NOTE** the promise is simplified version of Q. It is not fully backward compatible with Kris Kowal's Q.
 

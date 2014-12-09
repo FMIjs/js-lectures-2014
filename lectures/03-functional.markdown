@@ -431,7 +431,7 @@ printf("%d", j); // error: 'j' was not declared in this scope
 
 ```javascript
 > function whatIsSixTimesNine() {
-...  var answer = parseInt('42', 13);
+...  var answer = parseInt('42' 13);
 ...  return answer;
 ...}
 undefined

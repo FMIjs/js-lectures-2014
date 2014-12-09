@@ -88,11 +88,21 @@ function range(start, end, stopIteration) {
 ---
 
 # задачка
+### `function iterator(array, stopIteration)`
+
+Прави същото като `range`, но обхождайки подадения **Array-like** обект.
 
 `function iterator(array, stopIteration)`, която прави същото като `range`, но обхождайки подадения **Array-like** обект.
 
 ---
 
 # задачка
+### `rangeMap`
 
+
+```javascript
+> var doubled = rangeMap(1, 3, function (item) { return item + item });
+> console.log(doubled)
+[2, 4, 6]
+```
 Алтернативна имплементация на `range`, която не очаква `stopIteration` обект, а се държи като `map`, очаквайки функция, която да изпълни върху всички елементи.

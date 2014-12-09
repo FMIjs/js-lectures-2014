@@ -440,18 +440,18 @@ assert( shuriken.isSharp === true,
 ```JavaScript
 
 function User(first, last){ 
-  if (!(this instanceof User)) 
+  if ( !(this instanceof arguments.callee) ) 
     return new User(first, last); 
-
-  this.name = first + ' ' + last; 
+   
+  this.name = first + " " + last; 
 } 
  
-var name = 'Resig'; 
+var name = "Resig"; 
 var user = User("John", name); 
 
-assert(user, 'This was defined correctly, even if it was by mistake.'); 
-assert(name == 'Resig', 'The right name was maintained.');
-
+assert( user, "This was defined correctly, even if it was by mistake." ); 
+assert( name == "Resig", "The right name was maintained." );
+ 
 ```
 
 (ref: http://ejohn.org/apps/learn/#38)
@@ -517,12 +517,15 @@ var bar = foo.bind(this, 1, 2);
 bar = bar(3); //6
 ```
 
+* тоест функцията bar ще бъде винаги в конкретен контекст
+* и ще получава винаги първите два параметъра тично определени
+
 ---
 
 # Всяка функция притежава поле prototype
 
-Полето prototype задава прототип на всички обекти създадени
-посредством извикване на дадената функция с оператора `new`.
+<h3> Полето prototype задава прототип на всички обекти създадени
+посредством извикване на дадената функция с оператора `new`. </h3>
 
 ---
 
@@ -581,6 +584,19 @@ var d2 = new Developer();
 d2.__proto__.foo += 1;
 
 console.log(d.foo); // 43
+console.log(Object.keys(d)); // []
+
+d.foo = 50;
+d2.__proto__.foo += 1;
+console.log(d.foo); // 50
+console.log(Object.keys(d)); // ['foo']
+
+```
+
+* през всеки обект имаме достъп до прототипа, чрез __proto__
+* при първото задаване на стойност за дадено property се създава такова 'конкретно' за обекта и вече се ползва само то
+* при инстанциране на обекта той де факто няма property-та и Object.keys връща празен списък, но имена които могат да се открият в прототипа се дават като property-та.
+
 ```
 ---
 
@@ -725,8 +741,11 @@ var createFoo = function createFoo() {
 
 * можем да създаваме нови обекти с `Object.create`
 * спасяваме се от доста 'new' бъгове
+* спираме да си мислим за JS като за Java
 * създаваме по-добра предпоставка за полиморфизъм
 * лесно можем да въведем Factory шаблон
+
+(ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
 
 ---
 
@@ -736,8 +755,7 @@ var createFoo = function createFoo() {
 * може лесно да се 'запълни' пропуска
 * ... или чрез es5-shim
 
-
-(ref: http://ericleads.com/2012/09/stop-using-constructor-functions-in-javascript/)
+(ref: https://github.com/es-shims/es5-shim)
 
 ---
 
@@ -788,3 +806,4 @@ var Page = (function () {
   };
 }());
 ```
+---
