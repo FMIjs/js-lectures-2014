@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>jquery test</title>
+  <link rel='stylesheet'  type='text/css' 
+    href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css' />
+
+  <style>
+  #swpContainer {
+  	display: none;
+  	width: 20px;
+  	position: relative;
+  }
+  </style>
+</head>
+
+<body>
+
+  <span id='swpContainer'>
+  	<button id='swap' class="btn btn-default"> SWAP ! </button>
+  </span>
+  
+<div id='container'>
+
+  <h1> very scary task </h1>
+  <br/>
+  <table id='dataTable' class='table table-striped table-bordered'>
+    <tbody id='tblDigits'>
+
+      <tr>
+        <td colspan='12'>this table is empty</td>
+      </tr>
+    </tbody>
+  </table>
+  <br/>
+  <button id='btnAdd' class="btn btn-default"> + </button>
+  </br/>  
+  <p class="bg-success">... no res yet </p>
+</div>
+
+</body>
+
+<script src='http://code.jquery.com/jquery-2.1.1.min.js'>  </script>
+<script src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js'> </script>
+
+<script>
+  $(document).ready(function () {
+    'use strict';
+
+    function getNums() {
+      var i;
+      var res;
+      for (i = 0; i < 10; i++) {
+        res += '<td>' + Math.ceil(Math.random() * 10, 2) + '</td>';
+      }
+      return '<tr>' + res + '</tr>';
+    }
+
+    console.log('set events');
+    $('#dataTable').on('hover', function() { console.log('mouse entered') } );
+
+    $('#dataTable tbody').on('mouseenter', 'tr', function() {
+      var r = 0;
+      $(this).children().each(function(idx, el) {
+        r += parseInt($(el).html());
+      });
+
+      $('#res').html(r);
+    });
+
+    var firstRow;
+
+    var swapRows = function() {
+    	if (firstRow !== undefined && firstRow.length > 0) {
+    		if ( $(firstRow).next().length !== undefined ) {
+    			var secondRow = $(firstRow).next();
+
+    			var fElems = $(firstRow).children();
+    			var sElems = $(secondRow).children();
+
+    			firstRow.prepend(sElems);
+    			secondRow.prepend(fElems);
+    		}
+    	}
+    }
+
+    $('#swap').on('click', swapRows);
+
+    $('#dataTable tbody')
+    .on('mouseenter', 'td', function(evt) { 
+      console.log('mouse is at', evt.pageX, evt.pageY);
+
+       $('#swpContainer').show();
+/*     $('#swpContainer').offset({
+      	top: evt.pageY - 10,
+      	left: evt.pageX
+      });*/
+
+      $('#swpContainer').animate({
+      	top: evt.pageY - 10,
+      	left: evt.pageX
+      },
+      100);
+
+      firstRow = $(this).parent();
+    });
+
+    $('#container').on('mousemove', function (evt) {
+    	if (evt.target === this) {
+    		$('#swpContainer').hide();
+    	}
+    });
+
+    $('#btnAdd').on('click', function () {
+      $("#tblDigits td:contains('empty')").parent().remove();
+
+      $('#tblDigits').append(getNums());
+    });
+  });
+
+</script>
+
+</html>
