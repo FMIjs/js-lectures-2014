@@ -23,8 +23,6 @@ jQuery е cross-browser JavaScript библиотека, създадена за
 jQuery предоставя мощен набор от инструменти, които създават абстракция над стандартния API, който предлагат браузърите и ни
 позволява да пишем еднакъв код независимо от това дали потребителят използва IE6 или Chrome 23. Освен с невъвместимостите между различните браузъри, jQuery ни предоставя лесен и удобен за използване internal DSL за работа с client-side JavaScript.
 
-
-
 ---
 
 ## Защо jQuery?
@@ -36,7 +34,6 @@ jQuery предоставя мощен набор от инструменти, �
 * Голямо community
 * Лесен за използване
 * Добре документиран
-
 
 ---
 
@@ -654,7 +651,7 @@ jQuery ни предлага façade за работа с API предлаган
 ```javascript
 function createXMLHttp() {
   //If XMLHttpRequest is available then using it
-  if (typeof XMLHttpRequest !== undefined) {
+  if (typeof XMLHttpRequest !== 'undefined') {
     return new XMLHttpRequest;
   //if window.ActiveXObject is available than the user is using IE...so we have to create the newest version XMLHttp object
   } else if (window.ActiveXObject) {
@@ -672,7 +669,6 @@ function createXMLHttp() {
   }
 }
 ```
-
 
 ---
 
