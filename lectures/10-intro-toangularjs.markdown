@@ -198,13 +198,6 @@ code {
 
 ---
 
-
-### Темплейти
-
-<iframe src="./examples/template.html" width="800" height="300" frameborder="0"></iframe>
-
----
-
 ### Темплейти
 
 - **ng-app** - Задава базовия елемент на приложението
@@ -494,14 +487,6 @@ angular.module('myModule').controller('MainCtrl', function (...) {
   ...
 });
 ```
-
----
-
- ### Two-way binding
-
- AngularJS създава двупосочен binding между модела (полетата на scope) и изгледа (view).
-
-  <iframe class="fragment visible" src="./examples/template.html" width="800" height="300" frameborder="0" data-fragment-index="1"></iframe>
 
 ---
 
