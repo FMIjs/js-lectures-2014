@@ -1,9 +1,3 @@
-<style>
-code {
-  overflow: auto;
-}
-</style>
-
 ## Съдържание
 
 * Какво е SPA?
