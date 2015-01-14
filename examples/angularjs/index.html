@@ -9,6 +9,9 @@
   }
   .non-completed {
   }
+  .todo-list {
+    list-style: none;
+  }
   </style>
 </head>
 <body data-ng-app="todoApp" data-ng-controller="TodoCtrl">
@@ -16,18 +19,21 @@
     <input type="text" data-ng-model="current">
     <button data-ng-click="add()">Add todo</button>
 
-    <ul>
-      <li data-ng-repeat="todo in todos track by $index">
+    <ul class="todo-list">
+      <li data-ng-repeat="todo in collection.todos track by $index">
         <input type="checkbox"
           data-ng-model="todo.completed">
         <span data-ng-class="(todo.completed) ? 'completed' : 'non-completed'"
          data-ng-bind="todo.title"></span>
-        <button data-ng-click="remove($index)">X</button>
+        <button data-ng-click="remove(todo)">X</button>
       </li>
     </ul>
   </p>
   <script src="bower_components/angular/angular.js"></script>
   <script src="src/app.js"></script>
   <script src="src/controllers/TodoCtrl.js"></script>
+  <script src="src/services/LocalStorage.js"></script>
+  <script src="src/services/Todo.js"></script>
+  <script src="src/services/TodoCollection.js"></script>
 </body>
 </html>

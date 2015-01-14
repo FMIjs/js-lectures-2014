@@ -1,28 +1,21 @@
 angular.module('todoApp').
-  controller('TodoCtrl', function TodoCtrl($scope) {
+  controller('TodoCtrl', function TodoCtrl($scope, TodoCollection, Todo) {
     'use strict';
 
-    /*
-    {
-      "title": "Buy milk",
-      "completed": false|true
-    }
-    */
+    $scope.collection = TodoCollection;
 
-    $scope.todos = JSON.parse(localStorage.getItem('todos') || '[]');
+    $scope.$watch('collection', function () {
+      $scope.collection.save();
+    }, true);
+
     $scope.add = function () {
       if ($scope.current) {
-        $scope.todos.push({
-          title: $scope.current,
-          completed: false
-        });
+        TodoCollection.addTodo(new Todo($scope.current));
         $scope.current = '';
-        localStorage.setItem('todos', JSON.stringify($scope.todos));
       }
     };
 
-    $scope.remove = function (index) {
-      $scope.todos.splice(index, 1);
-      localStorage.setItem('todos', JSON.stringify($scope.todos));
+    $scope.remove = function (todo) {
+      TodoCollection.removeTodo(todo);
     };
   });
