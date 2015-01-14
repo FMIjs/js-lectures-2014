@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+  <style>
+  .completed {
+    text-decoration: line-through;
+  }
+  .non-completed {
+  }
+  </style>
+</head>
+<body data-ng-app data-ng-controller="TodoCtrl">
+  <p>
+    <input type="text" data-ng-model="current">
+    <button data-ng-click="add()">Add todo</button>
+
+    <ul>
+      <li data-ng-repeat="todo in todos track by $index">
+        <input type="checkbox"
+          data-ng-model="todo.completed">
+        <span data-ng-class="(todo.completed) ? 'completed' : 'non-completed'"
+         data-ng-bind="todo.title"></span>
+        <button data-ng-click="remove($index)">X</button>
+      </li>
+    </ul>
+  </p>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="src/app.js"></script>
+  <script src="src/controllers/TodoCtrl.js"></script>
+</body>
+</html>
