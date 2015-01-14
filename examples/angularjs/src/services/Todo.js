@@ -1,5 +1,5 @@
 angular.module('todoApp')
-  .factory('Todo', function () {
+  .factory('Todo', function Todo() {
     'use strict';
 
     function Todo(title) {
