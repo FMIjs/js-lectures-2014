@@ -542,7 +542,7 @@ Most advanced debugging tools have:
 
 ### Debugging in Chrome for Android
 
-![](../images/tooling/android.jpg)
+![](../img/tooling/android.jpg)
 
 ---
 
@@ -600,7 +600,7 @@ For measuring performance we will use Chrome Dev Tools's network tab.
 
 ### Measuring network performance
 
-![](../images/tooling/chrome-dev-tools-network.png)
+![](../img/tooling/chrome-dev-tools-network.png)
 
 ---
 
@@ -690,7 +690,7 @@ Small CSS files can be inlined.
 
 Loading images can lead to many HTTP requests. With the latest HTTP specification there is no elegant way for workarounding this. The best option is creating sprites:
 
-![](../images/tooling/facebook-sprite.png)
+![](../img/tooling/facebook-sprite.png)
 
 ---
 
@@ -797,7 +797,7 @@ There are good profiling tools in:
 
 ### Chrome Dev Tools Profiler
 
-![](../images/tooling/cpu-profiler.png)
+![](../img/tooling/cpu-profiler.png)
 
 ---
 
@@ -809,7 +809,7 @@ There are good profiling tools in:
 
 If there are many memory leaks in your application this may slow it down or even crash the browser (demo AngularJS Docs)
 
-![](../images/tooling/memory-profiling.png)
+![](../img/tooling/memory-profiling.png)
 
 ---
 
@@ -825,7 +825,7 @@ In JavaScript there are few common causes of memory leaks:
 
 ### Timeline
 
-![](../images/tooling/chrome-timeline.jpg)
+![](../img/tooling/chrome-timeline.jpg)
 
 ---
 
