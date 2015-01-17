@@ -27,7 +27,7 @@
 * CoffeeScript - minimalistic, ruby like
 * JSX - statically typed, similar to JS
 * Dart - optional types
-* [](http://altjs.org/)Many others...</a>
+* [Many others.](http://altjs.org/)
 
 ---
 
@@ -59,7 +59,7 @@ class Dog extends Animal
 
 The CoffeeScript transpiler turns CoffeeScript code to well written, readable JavaScript
 
-```
+```JavaScript
 (function() {
   #Animal and Class definition
 
@@ -108,7 +108,7 @@ f is bijective function.
 
 In other words something which maps our generated code to the original. In our case object literal.
 
-```
+```JavaScript
 {
     version : 3,
     file: "out.js",
@@ -138,7 +138,7 @@ In other words something which maps our generated code to the original. In our c
 
 ---
 
-```
+```JSX
 import "js/web.jsx";
 
 class Config {
@@ -188,9 +188,9 @@ final class FireworkView {
 
 ---
 
-```
-Future \_loadFromDB(Database db) {
-  \_db = db;
+```Dart
+Future _loadFromDB(Database db) {
+  _db = db;
 
   var trans = db.transaction(MILESTONE_STORE, 'readonly');
   var store = trans.objectStore(MILESTONE_STORE);
@@ -402,7 +402,7 @@ Documenting your code is very important process. In JavaScript you can use notat
 
 ## Example
 
-```
+```JavaScript
     /**
      * [foo description]
      * @param  {[type]} a [description]
@@ -424,7 +424,7 @@ Documenting your code is very important process. In JavaScript you can use notat
 
 You can define given functions as constructors:
 
-```
+```JavaScript
 /**
  * Creates a new Item.
  * @constructor
@@ -555,7 +555,7 @@ When you enable the debugging via USB you need:
 
 After that run:
 
-```
+```bash
 adb forward tcp:9222 localabstract:chrome_devtools_remote
 ```
 
@@ -576,7 +576,6 @@ For debugging in other mobile browsers check:
 * [Remote Debugging on Firefox for Android](https://hacks.mozilla.org/2012/08/remote-debugging-on-firefox-for-android/)
 * [Safari on iOS](http://moduscreate.com/enable-remote-web-inspector-in-ios-6/)
 * [Chrome (any OS)](https://developers.google.com/chrome/mobile/docs/debugging)
-
 
 ---
 
@@ -660,13 +659,13 @@ Loading JavaScript files is usually blocking - the document won't be rendered be
 
 Making the scripts load asynchronously with (HTML5):
 
-```
+```html
 <script src="//ajax.googleapis.com/ajax/libs/jquery/x.xx.x/jquery.min.js" async></script>
 ```
 
 ...or IIFE:
 
-```
+```JavaScript
 (function () {
 var s = document.createElement('script');
     s.type = "text/javascript";
@@ -698,7 +697,7 @@ Loading images can lead to many HTTP requests. With the latest HTTP specificatio
 
 Usually when using sprites you need to use the `background-position` and `background-size` CSS properties.
 
-```
+```CSS
 .star-icon {
   background-image: url(sprite.png);
   background-size: 50px 50px;
@@ -747,8 +746,8 @@ In Apache gzip can be enabled and processed with the module mod_deflate.
 
 You can't escape from the DNS lookups but you can make "pre-resolve".
 
-```
-    <link rel="dns-prefetch" href="//www.domain1.com">
+```HTML
+<link rel="dns-prefetch" href="//www.domain1.com">
 ```
 
 Firefox 3.5+, Chrome, Safari 5+ and IE 9+.
@@ -868,7 +867,7 @@ Grunt is extensible task management system which allows you to execute different
 
 For using Grunt you need Node.js and install the `grunt-cli`
 
-```
+```bash
 npm install -g grunt-cli
 ```
 
@@ -888,7 +887,7 @@ For installing grunt plugins you can use `npm` (Node Package Manager).
 
 You should start by running:
 
-```
+```bash
 npm init
 ```
 
@@ -900,7 +899,7 @@ The `init` command creates configuration file called `package.json`. It contains
 
 Using `npm` you can install grunt plugins using:
 
-```
+```bash
 npm install grunt-contrib-uglify --save-dev
 ```
 
@@ -914,7 +913,7 @@ Grunt configuration is contained inside Gruntfile.js. It loads different grunt p
 
 You can load grunt plugin by:
 
-```
+```bash
 grunt.loadNpmTasks('grunt-contrib-uglify');
 ```
 
@@ -924,16 +923,16 @@ grunt.loadNpmTasks('grunt-contrib-uglify');
 
 You can configure your plugin by:
 
-```
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    uglify: {
-      build: {
-        src: 'src/<%= pkg.name %>.js',
-        dest: 'build/<%= pkg.name %>.min.js'
-      }
+```JavaScript
+grunt.initConfig({
+  pkg: grunt.file.readJSON('package.json'),
+  uglify: {
+    build: {
+      src: 'src/<%= pkg.name %>.js',
+      dest: 'build/<%= pkg.name %>.min.js'
     }
-  });
+  }
+});
 ```
 
 ---
@@ -942,15 +941,15 @@ You can configure your plugin by:
 
 In case you have many tasks you want to run for building your project you can use:
 
-```
-  grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'copy']);
+```JavaScript
+grunt.registerTask('default', ['concat', 'uglify', 'cssmin', 'copy']);
 ```
 
 ---
 
 ## Putting all together
 
-```
+```JavaScript
 module.exports = function(grunt) {
 
   // Project configuration.
@@ -972,7 +971,6 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['uglify']);
-
 };
 ```
 
@@ -982,13 +980,13 @@ module.exports = function(grunt) {
 
 After registering given task you can run it by:
 
-```
+```bash
 grunt taskname
 ```
 
 There is one special task named "default" which can be run:
 
-```
+```bash
 grunt
 ```
 
@@ -1009,7 +1007,7 @@ In Java you can use Maven Dependency plugin, in Node.js you can use `npm`.
 
 For initializing bower for your project you need:
 
-```
+```bash
 #if you haven't already installed bower
 npm install -g bower
 
@@ -1021,7 +1019,7 @@ bower init
 
 ## Bower configuration
 
-```
+```JSON
 {
   "name": "Math-BrowniePoints-WebApp",
   "version": "0.1.0",
@@ -1045,7 +1043,6 @@ bower init
     "jquery-ui": "1.10.3",
   }
 }
-
 ```
 
 ---
@@ -1062,7 +1059,7 @@ You can specify version of given dependency, range of versions or just say `newe
 
 After running:
 
-```
+```bash
 bower install
 ```
 
@@ -1107,7 +1104,7 @@ Even this presentation is bootstrapped with Yeoman.
 
 ## Yeoman example
 
-```
+```bash
 #install yeoman
 npm install -g yeoman
 
@@ -1133,4 +1130,3 @@ yo angular
 ---
 
 # Thank you!
-
