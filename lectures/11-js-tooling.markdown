@@ -530,7 +530,7 @@ Most advanced debugging tools have:
 * Google Chrome - Chrome Dev Tools
 * Firefox - Firebug or Firefox Development Tools
 * Safari - Development tools which are similar to Chrome Dev Tools but less powerful
-* Opera - Dragonfire
+* Opera - Dragonfly
 * Internet Explorer
 
 ---
@@ -789,7 +789,7 @@ There are good profiling tools in:
 * Chrome Dev Tools
 * Firebug
 * Firefox Dev Tools
-* Dragon Fire
+* Dragonfly
 * IE
 
 ---
